@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [hidden]="submitted" #form="ngForm" (submit)="onSubmit(form.value)">
+        <h1 class="text-center">Registration</h1>
+        <div class="form-group">
+          <label>
+            Email:
+            <input type="text"
+                   class="form-control"
+                   name="email"
+                   ngModel
+                   #email="ngModel"
+                   placeholder="your email..."
+                   required
+                   email>
+          </label>
+          <div *ngIf="!email.valid && email.touched" class="alert alert-danger">This field is invalid!</div>
+        </div>
+        <div class="form-group">
+          <label>
+            User type:
+            <select type="text"
+                    class="form-control"
+                    name="userType"
+                    [ngModel]="defaultType"
+                    #userTypeM="ngModel"
+                    required>
+              <option *ngFor="let userType of userTypes" [value]="userType.type">{{userType.title}}</option>
+            </select>
+          </label>
+          <div *ngIf="!userTypeM.valid && userTypeM.touched" class="alert alert-danger">This field is invalid!</div>
+        </div>
+        <div class="form-group">
+          <label>
+            Password:
+            <input type="text"
+                   class="form-control"
+                   name="password"
+                   ngModel
+                   #password="ngModel"
+                   placeholder="your password..."
+                   required
+                   minlength="5">
+          </label>
+          <div *ngIf="!password.valid && password.touched" class="alert alert-danger">This field is invalid!</div>
+        </div>
+        <div class="form-group">
+          <button type="submit"
+                  class="btn btn-success"
+                  [disabled]="!form.valid">
+            Submit
+          </button>
+        </div>
+      </form>
+      <section *ngIf="submitted">
+        <h1 class="text-center">User Data:</h1>
+        <div class="form-group">
+          <h2 class="text-center">Email</h2>
+          <h3 class="form-control">{{user.email}}</h3>
+        </div>
+        <div class="form-group">
+          <h2 class="text-center">User Type</h2>
+          <h3 class="form-control">{{user.userType}}</h3>
+        </div>
+        <div class="form-group">
+          <h2 class="text-center">Password</h2>
+          <h3 class="form-control">{{user.password}}</h3>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-warning" (click)="onReset()">Reset User</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
